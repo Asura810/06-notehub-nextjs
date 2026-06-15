@@ -27,7 +27,6 @@ export interface CreateNoteData {
   content: string;
 }
 
-// GET notes
 export const fetchNotes = async (params: FetchNotesParams): Promise<FetchNotesResponse> => {
   const response = await api.get<FetchNotesResponse>('/notes', {
     params,
@@ -36,7 +35,6 @@ export const fetchNotes = async (params: FetchNotesParams): Promise<FetchNotesRe
   return response.data;
 };
 
-// wrapper (SSR + CSR)
 export const getNotes = (
   params: FetchNotesParams = {
     page: 1,
@@ -51,21 +49,16 @@ export const getNotes = (
   });
 };
 
-// CREATE note
 export const createNote = async (note: CreateNoteData): Promise<Note> => {
   const response = await api.post<Note>('/notes', note);
   return response.data;
 };
 
-// DELETE note
 export const deleteNote = async (id: string): Promise<Note> => {
   const response = await api.delete<Note>(`/notes/${id}`);
   return response.data;
 };
 
-//
-// 👇 ВОТ ЭТО ДОБАВЛЯЕШЬ СЮДА
-//
 export const fetchNoteById = async (id: string): Promise<Note> => {
   const response = await api.get<Note>(`/notes/${id}`);
   return response.data;

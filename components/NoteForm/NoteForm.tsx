@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import css from './NoteForm.module.css';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createNote } from '@/lib/api/noteService';
+import { createNote } from '@/lib/api';
 
 interface NoteFormProps {
   onClose: () => void;
@@ -43,21 +43,18 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     >
       {({ isSubmitting }) => (
         <Form className={css.form}>
-          {/* TITLE */}
           <div className={css.formGroup}>
             <label htmlFor="title">Title</label>
             <Field id="title" name="title" className={css.input} />
             <ErrorMessage name="title" component="span" className={css.error} />
           </div>
 
-          {/* CONTENT */}
           <div className={css.formGroup}>
             <label htmlFor="content">Content</label>
             <Field as="textarea" id="content" name="content" rows={8} className={css.textarea} />
             <ErrorMessage name="content" component="span" className={css.error} />
           </div>
 
-          {/* TAG */}
           <div className={css.formGroup}>
             <label htmlFor="tag">Tag</label>
             <Field as="select" id="tag" name="tag" className={css.select}>
@@ -70,7 +67,6 @@ export default function NoteForm({ onClose }: NoteFormProps) {
             <ErrorMessage name="tag" component="span" className={css.error} />
           </div>
 
-          {/* ACTIONS */}
           <div className={css.actions}>
             <button type="button" className={css.cancelButton} onClick={onClose}>
               Cancel
